@@ -3,6 +3,7 @@ const errorMap = {
   MISSING_FIELDS: 400,
   ALREADY_EXISTS: 409,
   INVALID_TOKEN: 401,
+  NOT_FOUND: 404,
 };
 
 const mapError = (type) => errorMap[type] || 500;

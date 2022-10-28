@@ -20,7 +20,16 @@ const getUsers = async (req, res) => {
   return res.status(200).json(users);
 };
 
+// Requirement 6
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const user = await userService.findById(id);
+  if (user.type) return res.status(mapError(user.type)).json({ message: user.message });
+  return res.status(200).json(user.message);
+};
+
 module.exports = {
   createUser,
   getUsers,
+  findById,
 };
