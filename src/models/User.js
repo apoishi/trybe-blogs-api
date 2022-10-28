@@ -1,3 +1,4 @@
+// Requirement 02
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {

@@ -16,6 +16,14 @@ const validateLogin = async ({ email, password }) => {
   return { type: null, message: token };
 };
 
+// Rquirement 5
+const validateToken = (token) => {
+  if (!token) return { type: 'INVALID_TOKEN', message: 'Token not found' };
+  const result = jwtUtil.validateToken(token);
+  return result;
+};
+
 module.exports = {
   validateLogin,
+  validateToken,
 };

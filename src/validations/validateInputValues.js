@@ -7,7 +7,7 @@ const validateBody = ({ email, password }) => {
   return { type: null, message: '' };
 };
 
-// Requirement 4
+// Requirement 4 
 const validateUser = ({ displayName, email, password, image }) => {
   const { error } = newUserSchema.validate({ displayName, email, password, image });
   if (error) return { type: 'INVALID_FIELDS', message: error.message };

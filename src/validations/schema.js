@@ -1,5 +1,5 @@
 const Joi = require('joi');
-
+// Requirement 3
 const loginSchema = Joi.object({
   email: Joi.string().required()
     .messages({
@@ -13,6 +13,7 @@ const loginSchema = Joi.object({
     }),
 });
 
+// Requirement 5
 const newUserSchema = Joi.object({
   displayName: Joi.string().min(8).required()
     .messages({
