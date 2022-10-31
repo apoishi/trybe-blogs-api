@@ -2,12 +2,6 @@ const jwtUtil = require('../utils/jwt.util');
 
 const { User } = require('../models');
 
-const createToken = (userData) => {
-  const { password: _, ...userWithoutPassword } = userData;
-  const token = jwtUtil.createToken(userWithoutPassword);
-  return token;
-};
-
 // Requirement 3 
 const validateLogin = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
@@ -16,7 +10,9 @@ const validateLogin = async ({ email, password }) => {
     return { type: 'INVALID_FIELDS', message: 'Invalid fields' };
   }
 
-  const token = createToken(user.dataValues);
+  const { password: _, ...userWithoutPassword } = user.dataValues;
+
+  const token = jwtUtil.createToken(userWithoutPassword);
   return { type: null, message: token };
 };
 
@@ -30,5 +26,4 @@ const validateToken = (token) => {
 module.exports = {
   validateLogin,
   validateToken,
-  createToken,
 };

@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
 
   const newUser = await userService.createUser({ displayName, email, password, image });
   if (newUser.type) return res.status(mapError(newUser.type)).json({ message: newUser.message });
-  return res.status(201).json({ token: newUser.message });
+  return res.status(201).json(newUser.message);
 };
 
 // Requirement 5

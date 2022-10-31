@@ -14,6 +14,7 @@ const validateUser = ({ displayName, email, password, image }) => {
   return { type: null, message: '' };
 };
 
+// Requirement 8
 const validateCategory = ({ name }) => {
   const { error } = categorySchema.validate({ name });
   if (error) return { type: 'INVALID_FIELDS', message: error.message };
