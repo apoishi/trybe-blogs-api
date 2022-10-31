@@ -16,6 +16,12 @@ const createCategory = async ({ name }) => {
   return { type: null, message: result };
 };
 
+// Requirement 9
+const getCategories = async () => {
+  const categories = await Category.findAll();
+  return categories;
+};
 module.exports = {
   createCategory,
+  getCategories,
 };
