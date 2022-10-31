@@ -1,0 +1,20 @@
+const categoryService = require('../services/category.service');
+const { mapError } = require('../utils/errorMap');
+const { validateCategory } = require('../validations/validateInputValues');
+
+const createCategory = async (req, res) => {
+  const { name } = req.body;
+
+  const error = validateCategory({ name });
+  if (error.type) return res.status(mapError(error.type)).json({ message: error.message });
+
+  const newCategory = await categoryService.createCategory({ name });
+  if (newCategory.type) {
+    return res.status(mapError(newCategory.type)).json({ message: newCategory.message });
+  }
+  res.status(201).json(newCategory.message);
+};
+
+module.exports = {
+  createCategory,
+};
