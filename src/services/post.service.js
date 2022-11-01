@@ -27,16 +27,28 @@ const createPost = async ({ title, content, categoryIds }, { email }) => {
 
 // Requirement 13
 const getPosts = async () => {
-  const blogPosts = await BlogPost.findAll({
+  const posts = await BlogPost.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: 'password' } },
       { model: Category, as: 'categories', through: { attributes: [] } },
     ],
   });
-  return blogPosts;
+  return posts;
+};
+
+const getPostById = async (id) => {
+  const post = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+  if (post) return { type: null, message: post };
+  return { type: 'NOT_FOUND', message: 'Post does not exist' };
 };
 
 module.exports = {
   createPost,
   getPosts,
+  getPostById,
 };
