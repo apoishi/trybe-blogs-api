@@ -1,4 +1,9 @@
-const { loginSchema, newUserSchema, categorySchema } = require('./schema');
+const { 
+  loginSchema,
+   newUserSchema, 
+   categorySchema,
+   postSchema,
+} = require('./schema');
 
 // Requirement 3 
 const validateBody = ({ email, password }) => {
@@ -21,8 +26,16 @@ const validateCategory = ({ name }) => {
   return { type: null, message: '' };
 };
 
+// Requirement 12
+const validatePost = ({ title, content, categoryIds }) => {
+const { error } = postSchema.validate({ title, content, categoryIds });
+if (error) return { type: 'INVALID_VALUES', message: error.message };
+return { type: null, message: '' };
+};
+
 module.exports = {
 validateBody,
 validateUser,
 validateCategory,
+validatePost,
 };

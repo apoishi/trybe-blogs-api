@@ -6,8 +6,8 @@ const { validateBody } = require('../validations/validateInputValues');
 const login = async (req, res) => {
     const { email, password } = req.body;
 
-    const body = await validateBody({ email, password });
-    if (body.type) return res.status(mapError(body.type)).json({ message: body.message });
+    const error = validateBody({ email, password });
+    if (error.type) return res.status(mapError(error.type)).json({ message: error.message });
     
     const token = await validateLogin({ email, password });
     if (token.type) return res.status(mapError(token.type)).json({ message: token.message });

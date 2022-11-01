@@ -30,7 +30,7 @@ const findById = async (id) => {
   }
   return { type: null, message: user };
 };
-    
+  
   module.exports = {
     createUser,
     getUsers,

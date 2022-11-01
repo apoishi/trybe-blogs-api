@@ -7,9 +7,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    userId : DataTypes.INTEGER,  
-    published: DataTypes.DATE,
-    updated: DataTypes.DATE,
+    userId: { 
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },  
+    published: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    updated: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
   },
   {
     tableName: 'blog_posts',

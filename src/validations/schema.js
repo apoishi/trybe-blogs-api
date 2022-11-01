@@ -1,15 +1,18 @@
 const Joi = require('joi');
+
+const REQUIRED_MSG = 'Some required fields are missing';
+
 // Requirement 3
 const loginSchema = Joi.object({
   email: Joi.string().required()
     .messages({
-      'string.required': 'Some required fields are missing',
-      'string.empty': 'Some required fields are missing',
+      'string.required': REQUIRED_MSG,
+      'string.empty': REQUIRED_MSG,
     }),
   password: Joi.string().required()
     .messages({
-      'string.required': 'Some required fields are missing',
-      'string.empty': 'Some required fields are missing',
+      'string.required': REQUIRED_MSG,
+      'string.empty': REQUIRED_MSG,
     }),
 });
 
@@ -39,8 +42,23 @@ const categorySchema = Joi.object({
   }),
 });
 
+// Requirement 12
+const postSchema = Joi.object({
+  title: Joi.string().required().messages({
+    'string.empty': REQUIRED_MSG,
+  }),
+  content: Joi.string().required().messages({
+    'string.empty': REQUIRED_MSG,
+  }),
+  categoryIds: Joi.array().items(Joi.number().min(1).required()).required().messages({
+    'array.empty': REQUIRED_MSG,
+    'string.empty': REQUIRED_MSG,
+  }),
+});
+
 module.exports = {
 loginSchema,
 newUserSchema,
 categorySchema,
+postSchema,
 };
