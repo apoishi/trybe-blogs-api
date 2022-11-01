@@ -25,6 +25,18 @@ const createPost = async ({ title, content, categoryIds }, { email }) => {
   return dataValues;
 };
 
+// Requirement 13
+const getPosts = async () => {
+  const blogPosts = await BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+  return blogPosts;
+};
+
 module.exports = {
   createPost,
+  getPosts,
 };
