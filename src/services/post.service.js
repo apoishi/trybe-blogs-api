@@ -36,6 +36,7 @@ const getPosts = async () => {
   return posts;
 };
 
+// Requirement 14
 const getPostById = async (id) => {
   const post = await BlogPost.findByPk(id, {
     include: [
@@ -47,8 +48,28 @@ const getPostById = async (id) => {
   return { type: 'NOT_FOUND', message: 'Post does not exist' };
 };
 
+// Requirement 15
+const findExistingId = async (id) => {
+  const blogPostId = await BlogPost.findOne({ where: { id } });
+  return blogPostId;
+};
+
+const updatePost = async (userId, id, { title, content }) => {
+  const blogPostId = await findExistingId(userId);
+  if (blogPostId.userId !== userId) {
+    return { type: 'UNAUTHORIZED', message: 'Unauthorized user' };
+  }
+
+await BlogPost.update({ title, content }, { where: { id } });
+
+const result = await getPostById(id);
+
+return result;
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
+  updatePost,
 };

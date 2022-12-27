@@ -3,6 +3,7 @@ const {
    newUserSchema, 
    categorySchema,
    postSchema,
+   postUpdateSchema,
 } = require('./schema');
 
 // Requirement 3 
@@ -33,9 +34,16 @@ if (error) return { type: 'INVALID_VALUES', message: error.message };
 return { type: null, message: '' };
 };
 
+const validatePostUpdate = ({ title, content }) => {
+  const { error } = postUpdateSchema.validate({ title, content });
+  if (error) return { type: 'INVALID_VALUES', message: error.message };
+  return { type: null, message: '' };
+  };
+
 module.exports = {
 validateBody,
 validateUser,
 validateCategory,
 validatePost,
+validatePostUpdate,
 };

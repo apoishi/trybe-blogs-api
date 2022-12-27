@@ -56,9 +56,20 @@ const postSchema = Joi.object({
   }),
 });
 
+// Requirement 14
+const postUpdateSchema = Joi.object({
+  title: Joi.string().required().messages({
+    'string.empty': REQUIRED_MSG,
+  }),
+  content: Joi.string().required().messages({
+    'string.empty': REQUIRED_MSG,
+  }),
+});
+
 module.exports = {
 loginSchema,
 newUserSchema,
 categorySchema,
 postSchema,
+postUpdateSchema,
 };
